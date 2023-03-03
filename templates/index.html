@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div style="margin-top: 100px" class="container">
+        <h3 >TodoApp</h1>
+        <hr><br>
+        <form action="/add" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Todo</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title" placeholder="Todo Girin..."><br>
+                <button class="btn btn-dark form-control">Gönder</button>
+            </div>
+        </form>
+        <hr>
+        {% if todos == [] %}
+        <div class="alert alert-warning" role="alert">
+            Bir Todo Bulunmuyor Lütfen Todo Giriniz...
+        </div>
+        {% else %}
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Todo Başlık</th>
+                <th scope="col">Todo Durum</th>
+                <th scope="col">Durum Güncelle</th>
+                <th scope="col">Todo Sil</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in todos %}
+              <tr>
+                <th scope="row">{{todo.id}}</th>
+                <td>{{todo.title}}</td>
+                {% if todo.complate == false %}
+                    <td>Tamamlanmadı <img width="25px" style="margin-left: 10px;" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-01-64.png" alt=""></td>
+                {% else %}
+                    <td>Tamamlandı <img width="25px" style="margin-left: 10px;" src="https://cdn3.iconfinder.com/data/icons/simple-web-navigation/165/tick-64.png" alt="true"></td>
+                {% endif %}
+                <td><a href="/complate/{{todo.id}}" class="btn btn-primary">Tamamla</a></td>
+                <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>
